@@ -5,7 +5,7 @@ Statistical Analysis of a 5Genesis Test Case composed of several Iterations
 It provides statistical indicators for each Iteration (as a figure), and the final indicators (with 95% confidence interval) for the Test Case
 It follows guidelines in D6.1
 
-Data Source: TAP .csv Listener 
+Data Source: .csv file 
 
 '''
 
@@ -63,7 +63,7 @@ def KPI_statistics (file, it, kpi, unit, exp_type):
         plt.xlabel('Iteration')
         plt.show()
         plt.ioff()
-        savepic = os.path.join(dirname, 'output.pdf')
+        savepic = os.path.join(dirname, 'Iteration_Statistics.pdf')
         plt.savefig(savepic)
         
         MEANS = [item.get_ydata() for item in B['means']]
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     file = "2019-08-07 21-26-19-DownlinkSinkonTrafficADB.csv"
     it = "_iteration_"                  # Iteration Identifier
     kpi = "Throughput (Mbps)"           # KPI Identifier
-    unit = 'Mbps'                         # Measure Unit
+    unit = 'Mbps'                       # Measure Unit
     exp_type = 0                        # 0: (default) Experiments with several KPI samples per iteration (e.g. throughput, ping) (default)
                                         # 1: Experiments with a single KPI sample per iteration (e.g. Slice /Service creation time)
     # Usage in python
