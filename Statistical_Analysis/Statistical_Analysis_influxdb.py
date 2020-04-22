@@ -61,7 +61,7 @@ def KPI_statistics (client, experimentIds, table, it, kpi, unit, exp_type):
         plt.xlabel('Iteration')
         plt.show()
         plt.ioff()
-        savepic = os.path.join(dirname, 'output.pdf')
+        savepic = os.path.join(dirname, 'Iteration_Statistics.pdf')
         plt.savefig(savepic)
         
         MEANS = [item.get_ydata() for item in B['means']]
