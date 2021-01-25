@@ -235,14 +235,14 @@ Example output for /statistical_analysis/:
 {
     "experimentid": {
         "520": {
-    	    "Delay (ms)": {
-    	        "Iteration Statistics": {
+            "Delay (ms)": {
+                "Iteration Statistics": {
                     "0": {
-        		        "25% Percentile":54.800000000000004,	
-        		        "5% Percentile":24.259999999999998,
+                        "25% Percentile":54.800000000000004,	
+                        "5% Percentile":24.259999999999998,
                         ...
                     },
-        		    "1": {
+                    "1": {
                         "25% Percentile":54.550000000000004,
                         "5% Percentile":25.61,
                         ...
