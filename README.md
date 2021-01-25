@@ -237,28 +237,28 @@ Example output for /statistical_analysis/:
         "520": {
     	    "Delay (ms)": {
     	        "Iteration Statistics": {
-        		    "0": {
+                    "0": {
         		        "25% Percentile":54.800000000000004,	
         		        "5% Percentile":24.259999999999998,
-        			    ...
+                        ...
                     },
         		    "1": {
-        			    "25% Percentile":54.550000000000004,
-        			    "5% Percentile":25.61,
-               		    ...
+                        "25% Percentile":54.550000000000004,
+                        "5% Percentile":25.61,
+                        ...
                     },
-    		        ...
+                    ...
                 },
-        		"Test Case Statistics": {
-        		    "25% Percentile": {
-        		        "Confidence Interval":1.0124404204175417,	
-        		        "Value":57.058
-        			},
-        		    "5% Percentile": {
-        			"Confidence Interval":1.1079808517791605,
-        			"Value":24.4246
-               		},
-        		    ...
+                "Test Case Statistics": {
+                    "25% Percentile": {
+                        "Confidence Interval":1.0124404204175417,	
+                        "Value":57.058
+                    },
+                    "5% Percentile": {
+                    "Confidence Interval":1.1079808517791605,
+                    "Value":24.4246
+                    },
+                    ...
                 }
             }
         }
