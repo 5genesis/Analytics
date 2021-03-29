@@ -1,7 +1,6 @@
 # 5Genesis Analytics Module - Containerized
 The 5Genesis Analytics module provides methods for analysing and offline learning on the data that is provided by the platform monitoring.
 
-![5Genesis Containerzed Analytics Module](./Figures/containerised_analytics.png)
 
 ## Requirements
 Docker >= 18.06.0
@@ -21,12 +20,7 @@ Docker >= 18.06.0
     docker swarm init
     ```
 
-3. Log in to GitLab Docker registry:
-    ```bash
-    docker login dockerhub.fokus.fraunhofer.de:5000
-    ```
-
-4. Create a Docker Swarm secret by entering the connection details and credentials for each database connection:
+3. Create a Docker Swarm secret by entering the connection details and credentials for each database connection:
     ```bash
     docker secret create analytics_connections - << END
     platform_name:      # replace platform_name, e.g. uma
@@ -40,18 +34,23 @@ Docker >= 18.06.0
     END
     ```
 
-5. Create a Docker Swarm secret for user authentication. Users can only access experiment IDs that are encrypted with this secret. A master password access is also granted with this secret. Replace "secret123" with the actual secret string.
+4. Create a Docker Swarm secret for user authentication. Users can only access experiment IDs that are encrypted with this secret. A master password access is also granted with this secret. Replace "secret123" with the actual secret string.
     ```bash
     echo secret123 | docker secret create analytics_secret -
     ```
 
-6. Download analytics-stack.yaml from this repository.
+5. Clone this repository.
 
-7. Deploy Docker images to Swarm from the location where the analytics-stack.yaml file is located:
+6. Build and deploy containers with
     ```bash
-    docker stack deploy -c analytics-stack.yaml analytics --with-registry-auth
-    ```
+    ./install.sh
+    ``` 
     Note that it will take some time to query and cache the experiment IDs at the first startup of the containers. Depending on the size of the data in the database, this could take from a few seconds to a few minutes before the containers are ready to use.
+
+
+## Overview
+
+![5Genesis Containerzed Analytics Module](./Figures/containerised_analytics.png)
 
 
 ## Usage
