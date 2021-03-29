@@ -1,0 +1,13 @@
+# Compiled files
+*.pyc
+
+# Latex related
+*.aux
+*.bbl
+*.blg
+*.gz
+
+# Other meta files
+*.sublime-workspace
+*.sublime-project
+.vscode/settings.json
