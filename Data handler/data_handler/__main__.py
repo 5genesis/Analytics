@@ -1,3 +1,5 @@
+__author__ = 'Erik Aumayr'
+
 from datetime import datetime
 from flask import Flask, request
 import json

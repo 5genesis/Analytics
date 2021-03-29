@@ -13,7 +13,7 @@ Output: dataframe with a boolean column indicating if the values is either outli
         dataframe composed of its outliers, index maintained
 """
 
-__author__ = 'LMI, SRL'
+__author__ = 'Erik Aumayr, SRL'
 
 import pandas as pd
 

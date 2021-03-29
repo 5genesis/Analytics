@@ -1,4 +1,4 @@
-__author__ = 'SRL-LMI'
+__author__ = 'SRL'
 
 
 import pandas as pd

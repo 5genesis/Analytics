@@ -1,3 +1,5 @@
+__author__ = 'Erik Aumayr, SRL'
+
 from flask import Flask, send_file
 import plotly
 import plotly.graph_objects as go
@@ -13,7 +15,6 @@ import json
 import requests
 from urllib.parse import urlparse, parse_qs
 import pandas as pd
-# from visualization.outlier_detection import detect
 from datetime import datetime
 from io import BytesIO
 import jwt
@@ -75,7 +76,7 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.Div([
-                html.Img(src=app.get_asset_url('5genesis_logo.png'),  # https://pbs.twimg.com/media/EWm7hjlX0AUl_AJ.png
+                html.Img(src=app.get_asset_url('5genesis_logo.png'),  # from https://pbs.twimg.com/media/EWm7hjlX0AUl_AJ.png
                          style={'height': '12rem', 'width': '12rem', 'border-radius': '50%'}),
                 html.H2("Analytics", style={'margin-top': '2rem'})
             ], style={'display': 'block', 'text-align': 'center', 'padding-top': '2rem'}),
@@ -469,21 +470,6 @@ kpi_filter_list = ['Available RAM', 'PacketsReceived', 'Total RAM', 'Used CPU Pe
 meas_filter_list = ['execution_metadata', 'syslog']
 
 
-# # callback to return experiment ID options
-# # This version does not require authentication
-# @app.callback(
-#     Output('experiment', 'options'),
-#     [Input('datasource', 'value')])
-# def find_experimentID(datasource):
-#     if not datasource:
-#         return []
-#     start = datetime.now()
-#     link = f'http://data_handler:5000/get_all_experimentIds/{datasource}'
-#     r = requests.get(link)
-#     experiment_list = list(r.json().values())[0]
-#     print(f"-- find_experimentID: {datetime.now()-start}", flush=True)
-#     return [{'label': i, 'value': i} for i in experiment_list]
-
 # callback to return experiment ID options
 @app.callback(
     [Output('experiment', 'options'),
@@ -605,7 +591,6 @@ def update_graph(kpi, outlier, tab, df):
         feature = kpi[i]
         series = df[feature]
         series.reset_index(drop=True, inplace=True)
-        # if outlier == 'None':
         traces.append(go.Scatter(
             x=df.index,
             y=series,
@@ -613,22 +598,7 @@ def update_graph(kpi, outlier, tab, df):
             name=feature,
             yaxis=f"y{i+1}" if i > 0 else 'y'
         ))
-        # else:
-        #     if outlier == 'zscore':
-        #         mod = 0
-        #     elif outlier == 'mad':
-        #         mod = 1
 
-        #     temp = detect(series, mod)
-        #     temp = temp[temp.outliers][feature]
-        #     traces.append(go.Scatter(
-        #         x=df.index,
-        #         y=temp,
-        #         mode='markers',
-        #         name=feature,
-        #         yaxis=f"y{i+1}" if i > 0 else 'y',
-        #         marker={'color': 'darkred', 'size': 12}
-        #     ))
     figure = {
         'data': traces,
         'layout': {
@@ -868,7 +838,6 @@ def update_table(test_case_stat_df, tab):
 def correlation_matrix(outlier, measurement, tab, corr_tab, kpis, correlation_method, experiment, datasource):
     if not measurement or not outlier or tab != "correlation-tab" or corr_tab != "cross-correlation-tab":
         return empty_fig
-        # return empty_fig, None
     start = datetime.now()
     link = f'http://correlation:5001/correlate/fields/{datasource}/{experiment}'
     param_dict = {
@@ -942,26 +911,6 @@ def correlation_matrix(outlier, measurement, tab, corr_tab, kpis, correlation_me
 ###
 # Cross experiment correlation sub tab
 ###
-
-# # callback to return experiment2 ID options
-# @app.callback(
-#     Output('experiment2', 'options'),
-#     [Input('experiment', 'value'),
-#      Input('datasource', 'value'),
-#      Input('measurement', 'value'),
-#      Input("tabs", "value"),
-#      Input("corr-tabs", "value")])
-# def find_second_experimentID(experiment, datasource, measurement, tab, corr_tab):
-#     opt_list = []
-#     if experiment and measurement and tab == "correlation-tab" and corr_tab == "experiment-correlation-tab":
-#         for meas in measurement:
-#             link = f'http://data_handler:5000/get_experimentIds_for_measurement/{datasource}/{meas}'
-#             r = requests.get(link)
-#             experiment_list = list(r.json().values())[0]
-#             for i in [e for e in experiment_list if e != experiment]:
-#                 opt_list.append({'label': i, 'value': i})
-#     return opt_list
-
 
 # callback to return experiment2 ID options
 @app.callback(

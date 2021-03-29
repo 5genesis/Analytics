@@ -1,3 +1,5 @@
+__author__ = 'Erik Aumayr'
+
 from flask import Flask, request, send_file
 import json
 import requests
@@ -59,7 +61,6 @@ def predict(datasource, algorithm, target):
     if not experimentIds or experimentIds == []:
         return {"error": "Must specify at least one experimentId with experimentid=123."}, 400
     measurements = request.args.getlist('measurement')
-    # measurements = ("&measurement=" + "&measurement=".join(measurements)) if measurements else ""
     drop_features = request.args.getlist('drop_feature')
     remove_outliers = request.args.get('remove_outliers')
     normalize = request.args.get('normalize')
@@ -79,8 +80,6 @@ def predict(datasource, algorithm, target):
         }
         r = requests.get(f'http://data_handler:5000/get_data/{datasource}/{experimentId}', params=param_dict)
         data = r.json()
-        # with urllib.request.urlopen(f'http://data_handler:5000/get_data/{datasource}/{experimentId}?match_series=false&remove_outliers={remove_outliers}{measurements}') as response:
-        #     data = json.loads(response.read())
         series = series.append(pd.DataFrame(data).reset_index(drop=True))
     if algorithm in ['linreg', 'linear_regression']:
         coefficients, results, y_values, model = linear_regression(
