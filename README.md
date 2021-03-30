@@ -43,7 +43,7 @@ Docker >= 18.06.0
 
 6. Build and deploy containers with
     ```bash
-    ./install.sh
+    ./Analytics/install.sh
     ``` 
     Note that it will take some time to query and cache the experiment IDs at the first startup of the containers. Depending on the size of the data in the database, this could take from a few seconds to a few minutes before the containers are ready to use.
 
