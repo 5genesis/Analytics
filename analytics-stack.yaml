@@ -2,29 +2,29 @@ version: '3.8'
 
 services:
   data_handler:
-    image: 5genesis-analytics/data-handler:0.2.6
+    image: 5genesis-analytics/data-handler:0.2.7
     ports:
       - "5000:5000"
     secrets:
       - analytics_connections
   correlation:
-    image: 5genesis-analytics/correlation:0.1.4
+    image: 5genesis-analytics/correlation:0.1.5
     ports:
       - "5001:5001"
   prediction:
-    image: 5genesis-analytics/prediction:0.1.6
+    image: 5genesis-analytics/prediction:0.1.7
     ports:
       - "5002:5002"
   statistical_analysis:
-    image: 5genesis-analytics/statistical-analysis:0.1.3
+    image: 5genesis-analytics/statistical-analysis:0.1.4
     ports:
       - "5003:5003"
   feature_selection:
-    image: 5genesis-analytics/feature-selection:0.1.2
+    image: 5genesis-analytics/feature-selection:0.1.3
     ports:
       - "5004:5004"
   visualization:
-    image: 5genesis-analytics/visualization:1.0.0
+    image: 5genesis-analytics/visualization:1.0.1
     ports:
       - "5005:5005"
     secrets:
