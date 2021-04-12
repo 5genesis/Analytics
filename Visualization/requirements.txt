@@ -3,9 +3,8 @@ dash==1.17.0
 dash-bootstrap-components==0.10.7
 plotly==4.8.1
 matplotlib==3.2.2
-pandas==1.0.1
+pandas==1.2.3
 numpy==1.18.1
-scipy==1.4.1
 influxdb==5.2.3
 requests==2.24.0
 pyjwt==2.0.1
