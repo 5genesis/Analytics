@@ -1,5 +1,6 @@
 __author__ = 'Erik Aumayr'
 
+from os import environ
 from datetime import datetime
 from flask import Flask, request
 import json
@@ -87,14 +88,17 @@ def retrieve_data(datasource, experimentId, measurements=[], fields=[], match_se
     if datasource not in sources or not sources[datasource].client:
         return None
     dataid = str(datasource) + str(experimentId) + ''.join(sorted(measurements)) + str(fields) + str(remove_outliers) + str(match_series) + str(additional_clause) + str(max_lag) + str(limit)
-    global data_cache
-    if dataid not in data_cache:
-        print('-- Retrieving uncached data', flush=True)
-        data = getattr(sources[datasource], "get_data")(experimentId, measurements=measurements, fields=fields, additional_clause=additional_clause, chunked=chunked, chunk_size=chunk_size, limit=limit, offset=offset, max_lag=max_lag)
-        data_cache[dataid] = data
+    if enable_cache:
+        global data_cache
+        if dataid not in data_cache:
+            print('-- Retrieving uncached data', flush=True)
+            data = getattr(sources[datasource], "get_data")(experimentId, measurements=measurements, fields=fields, additional_clause=additional_clause, chunked=chunked, chunk_size=chunk_size, limit=limit, offset=offset, max_lag=max_lag)
+            data_cache[dataid] = data
+        else:
+            print('-- Using cached data', flush=True)
+            data = data_cache[dataid]
     else:
-        print('-- Using cached data', flush=True)
-        data = data_cache[dataid]
+        data = getattr(sources[datasource], "get_data")(experimentId, measurements=measurements, fields=fields, additional_clause=additional_clause, chunked=chunked, chunk_size=chunk_size, limit=limit, offset=offset, max_lag=max_lag)
     if match_series:
         data = synchronize(dataframes=data, max_lag=max_lag, merge=True)
     if remove_outliers:
@@ -169,6 +173,7 @@ if __name__ == '__main__':
 
     # Data cache
     data_cache = {}
+    enable_cache = environ.get("ENABLE_CACHE", "False").lower() == "true"
 
     # Start app
     app.run(host='0.0.0.0', port=5000, debug=False)

@@ -2,11 +2,13 @@ version: '3.8'
 
 services:
   data_handler:
-    image: 5genesis-analytics/data-handler:0.2.7
+    image: 5genesis-analytics/data-handler:0.2.8
     ports:
       - "5000:5000"
     secrets:
       - analytics_connections
+    environment:
+      ENABLE_CACHE: "false"
   correlation:
     image: 5genesis-analytics/correlation:0.1.5
     ports:

@@ -41,10 +41,20 @@ Docker >= 18.06.0
 
 5. Clone this repository.
 
-6. Build and deploy containers with
+6. The Analytics Module can be configured to cache the requested data for faster future use. This is disabled by default for compatibility, but can be enabled by setting ENABLE_CACHE to true in the stack file analytics-stack.yaml:
+    ```yaml
+    services:
+        data_handler:
+            ...
+            environment:
+                ENABLE_CACHE: "true"
+        ...
+    ```
+
+7. Build and deploy containers with
     ```bash
     ./Analytics/install.sh
-    ``` 
+    ```
     Note that it will take some time to query and cache the experiment IDs at the first startup of the containers. Depending on the size of the data in the database, this could take from a few seconds to a few minutes before the containers are ready to use.
 
 
