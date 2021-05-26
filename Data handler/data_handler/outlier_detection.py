@@ -28,7 +28,7 @@ def detect(data, mode=0):
         distance = abs(data - data.median())
         MAD = distance.median()
         zscores_MAD = 0.6745 * distance / MAD
-        data['outliers'] = zscores_MAD[zscores_MAD > 4].any(axis=1)
+        data['outliers'] = zscores_MAD[zscores_MAD > 3.5].any(axis=1)
 
     else:
         print(
