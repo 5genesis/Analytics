@@ -7,4 +7,4 @@ pandas==1.2.3
 numpy==1.18.1
 influxdb==5.2.3
 requests==2.24.0
-pyjwt==2.0.1
+pyjwt==2.4.0
